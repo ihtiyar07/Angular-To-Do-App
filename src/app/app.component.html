@@ -1,0 +1,41 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+<div class="body">
+
+  <div class="todo-header">todos</div>
+
+  <div class="todo-container shadow-sm">
+    <input type="text" class="todo-input" [(ngModel)]="newTodoTitle" (keyup.enter)="setTodos()" class="todo-input"
+      placeholder="What needs to be done?">
+
+    <ul class="todo-list">
+      <li *ngFor="let item of todos" class="todo-item " [ngClass]="{'completed': item.isCompleted}">
+        <input type="checkbox" [(ngModel)]="item.isCompleted" (click)="setToggle(item.id)"
+          class="form-check-input me-2">
+        <span>{{ item.title }}</span>
+        <i (click)="deleteTodo(item.id)" class="delete bi bi-x-lg"></i>
+      </li>
+    </ul>
+    
+    <hr>
+
+    
+    <div class="footer" *ngIf="(todos.length != 0); else elsecontent">
+      <span>Active {{itemCount}} items</span>
+      <ul class="filter-group">
+        <li><a (click)="getTodos()" class="active" href="#">All</a></li>
+        <li><a (click)="getTodos(false)" href="#">Active</a></li>
+        <li><a (click)="getTodos(true)" href="#">Completed</a></li>
+      </ul>
+    </div>
+
+    <ng-template #elsecontent class="" >
+      <div class="bg-success border-info rounded">
+        <strong class="h1 text-white ">GOOD JOB</strong>
+      </div>
+    </ng-template>
+    
+    
+  </div>
+
+</div>
